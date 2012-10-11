@@ -22,32 +22,30 @@
     FeaturedCarousel.prototype.loadItem = function(item) {
       var _this = this;
       $('#loading').show();
-      return setTimeout(function() {
-        return $.ajax({
-          url: item.attr('href'),
-          type: 'GET',
-          dataType: 'html',
-          cache: false,
-          error: function(jqXHR, textStatus, errorThrown) {
-            return console.log('error loading item');
-          },
-          success: function(data, textStatus, jqXHR) {
-            var container, existingItem;
-            item = $(data);
-            existingItem = $("#" + (item.attr('id')));
-            container = _this.el;
-            container.find('.active').removeClass('active').addClass('inactive');
-            if (existingItem.length === 0) {
-              item.appendTo(container);
-              item[0].offsetWidth;
-              item.removeClass('inactive').addClass('active');
-            } else {
-              existingItem.removeClass('inactive').addClass('active');
-            }
-            return $('#loading').hide();
+      return $.ajax({
+        url: item.attr('href'),
+        type: 'GET',
+        dataType: 'html',
+        cache: false,
+        error: function(jqXHR, textStatus, errorThrown) {
+          return console.log('error loading item');
+        },
+        success: function(data, textStatus, jqXHR) {
+          var container, existingItem;
+          item = $(data);
+          existingItem = $("#" + (item.attr('id')));
+          container = _this.el;
+          container.find('.active').removeClass('active').addClass('inactive');
+          if (existingItem.length === 0) {
+            item.appendTo(container);
+            item[0].offsetWidth;
+            item.removeClass('inactive').addClass('active');
+          } else {
+            existingItem.removeClass('inactive').addClass('active');
           }
-        });
-      }, 1000);
+          return $('#loading').hide();
+        }
+      });
     };
 
     return FeaturedCarousel;

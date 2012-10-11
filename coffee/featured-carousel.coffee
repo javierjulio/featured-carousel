@@ -13,33 +13,31 @@ class FeaturedCarousel
   loadItem: (item) =>
     $('#loading').show()
     
-    setTimeout( =>
-      $.ajax
-        url: item.attr('href')
-        type: 'GET'
-        dataType: 'html'
-        cache: false
-        error: (jqXHR, textStatus, errorThrown) =>
-          console.log('error loading item')
-        success: (data, textStatus, jqXHR) =>
-          item = $(data)
-          existingItem = $("##{item.attr('id')}")
+    $.ajax
+      url: item.attr('href')
+      type: 'GET'
+      dataType: 'html'
+      cache: false
+      error: (jqXHR, textStatus, errorThrown) =>
+        console.log('error loading item')
+      success: (data, textStatus, jqXHR) =>
+        item = $(data)
+        existingItem = $("##{item.attr('id')}")
+        
+        container = @el#$(@settings.containerSelector)
+        container.find('.active').removeClass('active').addClass('inactive')
+        
+        if existingItem.length == 0
+          item.appendTo(container)
           
-          container = @el#$(@settings.containerSelector)
-          container.find('.active').removeClass('active').addClass('inactive')
+          # force redraw otherwise element will just pop in rather than fade in
+          item[0].offsetWidth
           
-          if existingItem.length == 0
-            item.appendTo(container)
-            
-            # force redraw otherwise element will just pop in rather than fade in
-            item[0].offsetWidth
-            
-            item.removeClass('inactive').addClass('active')
-          else
-            existingItem.removeClass('inactive').addClass('active')
-          
-          $('#loading').hide()
-    , 1000)
+          item.removeClass('inactive').addClass('active')
+        else
+          existingItem.removeClass('inactive').addClass('active')
+        
+        $('#loading').hide()
 
 $.fn.featuredcarousel = (options) ->
   this.each ->
