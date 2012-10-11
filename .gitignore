@@ -1,0 +1,6 @@
+.DS_Store
+.rbenv-version
+.sass-cache/*
+.tddium
+.tddium-deploy-key
+.env
