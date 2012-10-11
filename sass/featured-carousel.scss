@@ -68,21 +68,39 @@ body {
   
   li {
     display: inline-block;
+    height: 60px;
     list-style: none;
     margin: 0 10px 0 0;
     padding: 0;
+    position: relative;
+    width: 80px;
   }
   
   a {
     background-color: #fff;
     border: 1px solid #ccc;
+    bottom: 0;
     display: block;
-    height: 60px;
-    padding: 10px;
+    left: 0;
+    position: absolute;
+    right: 0;
     text-decoration: none;
+    top: 0;
+  }
+  
+  .loading {
+    background-color: rgba(0, 0, 0, 0.8);
+    bottom: 0;
+    color: #fff;
+    display: block;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 2;
   }
 }
 
-#loading {
+.loading {
   display: none;
 }
