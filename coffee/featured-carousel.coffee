@@ -26,16 +26,15 @@ class FeaturedCarousel
         
         @element
           .find(".#{@settings.activeClass}")
-            .removeClass(@settings.activeClass)
-            .addClass(@settings.inactiveClass)
+          .removeClass(@settings.activeClass)
         
         if existingItem.length == 0
-          item.appendTo(@element)
+          item.removeClass(@settings.activeClass).appendTo(@element)
           # force redraw otherwise element will just pop in rather than fade in
           item[0].offsetWidth
           existingItem = item
         
-        existingItem.removeClass(@settings.inactiveClass).addClass(@settings.activeClass)
+        existingItem.addClass(@settings.activeClass)
         
         @element.trigger('itemloaded.featuredcarousel')
 
@@ -52,4 +51,3 @@ $.fn.featuredcarousel.defaults =
   linkListSelector: '.featured-carousel-selection-list'
   linkListDelegatedSelector: 'a'
   activeClass: 'active'
-  inactiveClass: 'inactive'

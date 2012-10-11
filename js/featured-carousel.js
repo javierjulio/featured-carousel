@@ -35,13 +35,13 @@
           var existingItem, item;
           item = $(data);
           existingItem = $("#" + (item.attr('id')));
-          _this.element.find("." + _this.settings.activeClass).removeClass(_this.settings.activeClass).addClass(_this.settings.inactiveClass);
+          _this.element.find("." + _this.settings.activeClass).removeClass(_this.settings.activeClass);
           if (existingItem.length === 0) {
-            item.appendTo(_this.element);
+            item.removeClass(_this.settings.activeClass).appendTo(_this.element);
             item[0].offsetWidth;
             existingItem = item;
           }
-          existingItem.removeClass(_this.settings.inactiveClass).addClass(_this.settings.activeClass);
+          existingItem.addClass(_this.settings.activeClass);
           return _this.element.trigger('itemloaded.featuredcarousel');
         }
       });
@@ -68,8 +68,7 @@
     containerSelector: '.featured-carousel',
     linkListSelector: '.featured-carousel-selection-list',
     linkListDelegatedSelector: 'a',
-    activeClass: 'active',
-    inactiveClass: 'inactive'
+    activeClass: 'active'
   };
 
 }).call(this);
