@@ -42,6 +42,14 @@ $('.featured-carousel')
   .featuredcarousel({
     linkListSelector: '.featured-carousel-list',
     linkListDelegatedSelector: 'a'
+  })
+  .on('click.itemselected.featuredcarousel', function(event){
+    console.log(event.target);
+    console.log($(event.target).data('featuredcarousel'))
+  })
+  .on('itemloaded.featuredcarousel', function(event){
+    console.log(event.target);
+    console.log($(event.target).data('featuredcarousel'))
   });
 </script>
 
