@@ -31,7 +31,6 @@
   <li><a href="item1.html">Image 1</a></li>
   <li><a href="item2.html">Image 2</a></li>
   <li><a href="item3.html">Image 3</a></li>
-  <li><strong id="loading">Loading...</strong></li>
 </ul>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
@@ -44,12 +43,12 @@ $('.featured-carousel')
     linkListDelegatedSelector: 'a'
   })
   .on('click.itemselected.featuredcarousel', function(event){
-    console.log(event.target);
-    console.log($(event.target).data('featuredcarousel'))
+    fc = $(event.target).data('featuredcarousel');
+    fc.selectedListItem.parent().append('<div class="loading">Loading...</div>')
   })
   .on('itemloaded.featuredcarousel', function(event){
-    console.log(event.target);
-    console.log($(event.target).data('featuredcarousel'))
+    fc = $(event.target).data('featuredcarousel');
+    fc.selectedListItem.parent().find('.loading').remove()
   });
 </script>
 
