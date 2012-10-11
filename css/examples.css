@@ -1,0 +1,108 @@
+.featured-carousel {
+  position: relative;
+}
+.featured-carousel .item {
+  position: absolute;
+  -webkit-transition: opacity 0.4s ease-in-out;
+  -moz-transition: opacity 0.4s ease-in-out;
+  -ms-transition: opacity 0.4s ease-in-out;
+  -o-transition: opacity 0.4s ease-in-out;
+  transition: opacity 0.4s ease-in-out;
+}
+.featured-carousel .inactive {
+  left: 0;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+  z-index: 2;
+}
+.featured-carousel .active {
+  left: 0;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+  opacity: 1;
+  -webkit-transition: opacity 0.4s ease-in-out 0.2s;
+  -moz-transition: opacity 0.4s ease-in-out 0.2s;
+  -ms-transition: opacity 0.4s ease-in-out 0.2s;
+  -o-transition: opacity 0.4s ease-in-out 0.2s;
+  transition: opacity 0.4s ease-in-out 0.2s;
+  z-index: 2;
+}
+
+body {
+  background-color: #e6e6e6;
+  margin: 10px auto;
+  width: 940px;
+}
+
+.featured-carousel {
+  height: 410px;
+}
+.featured-carousel .image-frame {
+  background-color: #f5f5f5;
+  border: 1px solid #fff;
+  -webkit-box-shadow: 0 1px 4px #888888;
+  -moz-box-shadow: 0 1px 4px #888888;
+  box-shadow: 0 1px 4px #888888;
+  display: block;
+  float: left;
+  padding: 10px;
+}
+.featured-carousel .image-frame img {
+  height: 380px;
+}
+.featured-carousel .content {
+  float: right;
+  margin-left: 20px;
+  width: 230px;
+}
+.featured-carousel .content a {
+  background-color: #eee;
+  border: 1px solid #ddd;
+  display: inline-block;
+  padding: 10px;
+}
+.featured-carousel .content button {
+  height: 30px;
+  margin-top: 30px;
+  padding: 10px;
+  width: 180px;
+}
+
+.featured-carousel-list {
+  margin: 20px 0 0 0;
+  padding: 0;
+}
+.featured-carousel-list li {
+  display: inline-block;
+  height: 60px;
+  list-style: none;
+  margin: 0 10px 0 0;
+  padding: 0;
+  position: relative;
+  width: 80px;
+}
+.featured-carousel-list a {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  bottom: 0;
+  display: block;
+  left: 0;
+  position: absolute;
+  right: 0;
+  text-decoration: none;
+  top: 0;
+}
+.featured-carousel-list .loading {
+  background-color: rgba(0, 0, 0, 0.8);
+  bottom: 0;
+  color: #fff;
+  display: block;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 2;
+}
+
+.loading {
+  display: none;
+}
