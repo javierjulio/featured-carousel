@@ -1,0 +1,88 @@
+@import "mixins";
+
+body {
+  background-color: #e6e6e6;
+  margin: 10px auto;
+  width: 940px;
+}
+
+.featured-carousel {
+  height: 410px;
+  position: relative;
+  
+  .image-frame {
+    background-color: #f5f5f5;
+    border: 1px solid #fff;
+    @include box-shadow(0 1px 4px #888);
+    display: block;
+    float: left;
+    padding: 10px;
+    
+    img {
+      height: 380px;
+    }
+  }
+  
+  .content {
+    float: right;
+    margin-left: 20px;
+    width: 230px;
+    
+    a {
+      background-color: #eee;
+      border: 1px solid #ddd;
+      display: inline-block;
+      padding: 10px;
+    }
+    
+    button {
+      height: 30px;
+      margin-top: 30px;
+      padding: 10px;
+      width: 180px;
+    }
+  }
+}
+
+.featured-carousel .item {
+  position: absolute;
+  @include transition(opacity 0.4s ease-in-out);
+}
+
+.featured-carousel .inactive {
+  left: 0;
+  @include opacity(0);
+  z-index: 2;
+}
+
+.featured-carousel .active {
+  left: 0;
+  @include opacity(1);
+  @include transition(opacity 0.4s ease-in-out 0.1s);
+  z-index: 2;
+}
+
+.featured-carousel-list {
+  margin: 20px 0 0 0;
+  padding: 0;
+  
+  li {
+    display: inline-block;
+    list-style: none;
+    margin: 0 10px 0 0;
+    padding: 0;
+  }
+  
+  a {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    display: block;
+    height: 60px;
+    padding: 10px;
+    text-decoration: none;
+  }
+}
+
+#loading {
+  display: none;
+}
