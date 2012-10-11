@@ -18,7 +18,7 @@
       event.preventDefault();
       this.selectedListItem = $(event.target);
       this.element.trigger('click.itemselected.featuredcarousel');
-      return this.loadContent(this.selectedItem.attr('href'));
+      return this.loadContent(this.selectedListItem.attr('href'));
     };
 
     FeaturedCarousel.prototype.loadContent = function(url) {
@@ -32,18 +32,16 @@
           return console.log('error loading item');
         },
         success: function(data, textStatus, jqXHR) {
-          var container, existingItem, item;
+          var existingItem, item;
           item = $(data);
           existingItem = $("#" + (item.attr('id')));
-          container = _this.element;
-          container.find('.active').removeClass('active').addClass('inactive');
+          _this.element.find("." + _this.settings.activeClass).removeClass(_this.settings.activeClass).addClass(_this.settings.inactiveClass);
           if (existingItem.length === 0) {
-            item.appendTo(container);
+            item.appendTo(_this.element);
             item[0].offsetWidth;
-            item.removeClass('inactive').addClass('active');
-          } else {
-            existingItem.removeClass('inactive').addClass('active');
+            existingItem = item;
           }
+          existingItem.removeClass(_this.settings.inactiveClass).addClass(_this.settings.activeClass);
           return _this.element.trigger('itemloaded.featuredcarousel');
         }
       });
@@ -69,7 +67,9 @@
   $.fn.featuredcarousel.defaults = {
     containerSelector: '.featured-carousel',
     linkListSelector: '.featured-carousel-selection-list',
-    linkListDelegatedSelector: 'a'
+    linkListDelegatedSelector: 'a',
+    activeClass: 'active',
+    inactiveClass: 'inactive'
   };
 
 }).call(this);

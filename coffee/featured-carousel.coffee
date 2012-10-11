@@ -10,7 +10,7 @@ class FeaturedCarousel
     event.preventDefault()
     @selectedListItem = $(event.target)
     @element.trigger('click.itemselected.featuredcarousel')
-    @loadContent(@selectedItem.attr('href'))
+    @loadContent(@selectedListItem.attr('href'))
 
   loadContent: (url) =>
     $.ajax
@@ -24,18 +24,18 @@ class FeaturedCarousel
         item = $(data)
         existingItem = $("##{item.attr('id')}")
         
-        container = @element#$(@settings.containerSelector)
-        container.find('.active').removeClass('active').addClass('inactive')
+        @element
+          .find(".#{@settings.activeClass}")
+            .removeClass(@settings.activeClass)
+            .addClass(@settings.inactiveClass)
         
         if existingItem.length == 0
-          item.appendTo(container)
-          
+          item.appendTo(@element)
           # force redraw otherwise element will just pop in rather than fade in
           item[0].offsetWidth
-          
-          item.removeClass('inactive').addClass('active')
-        else
-          existingItem.removeClass('inactive').addClass('active')
+          existingItem = item
+        
+        existingItem.removeClass(@settings.inactiveClass).addClass(@settings.activeClass)
         
         @element.trigger('itemloaded.featuredcarousel')
 
@@ -51,3 +51,5 @@ $.fn.featuredcarousel.defaults =
   containerSelector: '.featured-carousel'
   linkListSelector: '.featured-carousel-selection-list'
   linkListDelegatedSelector: 'a'
+  activeClass: 'active'
+  inactiveClass: 'inactive'
