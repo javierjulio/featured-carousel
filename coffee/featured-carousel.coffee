@@ -11,7 +11,7 @@ class FeaturedCarousel
     @loadItem($(event.target))
 
   loadItem: (item) =>
-    $('#loading').show()
+    @el.trigger('click.itemselected.featuredcarousel')
     
     $.ajax
       url: item.attr('href')
@@ -37,7 +37,7 @@ class FeaturedCarousel
         else
           existingItem.removeClass('inactive').addClass('active')
         
-        $('#loading').hide()
+        @el.trigger('itemloaded.featuredcarousel')
 
 $.fn.featuredcarousel = (options) ->
   this.each ->

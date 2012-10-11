@@ -21,7 +21,7 @@
 
     FeaturedCarousel.prototype.loadItem = function(item) {
       var _this = this;
-      $('#loading').show();
+      this.el.trigger('click.itemselected.featuredcarousel');
       return $.ajax({
         url: item.attr('href'),
         type: 'GET',
@@ -43,7 +43,7 @@
           } else {
             existingItem.removeClass('inactive').addClass('active');
           }
-          return $('#loading').hide();
+          return _this.el.trigger('itemloaded.featuredcarousel');
         }
       });
     };
