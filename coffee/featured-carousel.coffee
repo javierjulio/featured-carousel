@@ -1,20 +1,20 @@
 class FeaturedCarousel
   
   constructor: (element, options) ->
-    @el = $(element)
-    @settings = $.extend {}, $.fn.featuredcarousel.defaults, options, @el.data()
+    @element = $(element)
+    @settings = $.extend {}, $.fn.featuredcarousel.defaults, options, @element.data()
     
     $(@settings.linkListSelector).on 'click', @settings.linkListDelegatedSelector, @listClickHandler
 
   listClickHandler: (event) =>
     event.preventDefault()
-    @loadItem($(event.target))
+    @selectedListItem = $(event.target)
+    @element.trigger('click.itemselected.featuredcarousel')
+    @loadContent(@selectedItem.attr('href'))
 
-  loadItem: (item) =>
-    @el.trigger('click.itemselected.featuredcarousel')
-    
+  loadContent: (url) =>
     $.ajax
-      url: item.attr('href')
+      url: url
       type: 'GET'
       dataType: 'html'
       cache: false
@@ -24,7 +24,7 @@ class FeaturedCarousel
         item = $(data)
         existingItem = $("##{item.attr('id')}")
         
-        container = @el#$(@settings.containerSelector)
+        container = @element#$(@settings.containerSelector)
         container.find('.active').removeClass('active').addClass('inactive')
         
         if existingItem.length == 0
@@ -37,7 +37,7 @@ class FeaturedCarousel
         else
           existingItem.removeClass('inactive').addClass('active')
         
-        @el.trigger('itemloaded.featuredcarousel')
+        @element.trigger('itemloaded.featuredcarousel')
 
 $.fn.featuredcarousel = (options) ->
   this.each ->

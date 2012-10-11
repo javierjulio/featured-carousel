@@ -6,24 +6,25 @@
   FeaturedCarousel = (function() {
 
     function FeaturedCarousel(element, options) {
-      this.loadItem = __bind(this.loadItem, this);
+      this.loadContent = __bind(this.loadContent, this);
 
       this.listClickHandler = __bind(this.listClickHandler, this);
-      this.el = $(element);
-      this.settings = $.extend({}, $.fn.featuredcarousel.defaults, options, this.el.data());
+      this.element = $(element);
+      this.settings = $.extend({}, $.fn.featuredcarousel.defaults, options, this.element.data());
       $(this.settings.linkListSelector).on('click', this.settings.linkListDelegatedSelector, this.listClickHandler);
     }
 
     FeaturedCarousel.prototype.listClickHandler = function(event) {
       event.preventDefault();
-      return this.loadItem($(event.target));
+      this.selectedListItem = $(event.target);
+      this.element.trigger('click.itemselected.featuredcarousel');
+      return this.loadContent(this.selectedItem.attr('href'));
     };
 
-    FeaturedCarousel.prototype.loadItem = function(item) {
+    FeaturedCarousel.prototype.loadContent = function(url) {
       var _this = this;
-      this.el.trigger('click.itemselected.featuredcarousel');
       return $.ajax({
-        url: item.attr('href'),
+        url: url,
         type: 'GET',
         dataType: 'html',
         cache: false,
@@ -31,10 +32,10 @@
           return console.log('error loading item');
         },
         success: function(data, textStatus, jqXHR) {
-          var container, existingItem;
+          var container, existingItem, item;
           item = $(data);
           existingItem = $("#" + (item.attr('id')));
-          container = _this.el;
+          container = _this.element;
           container.find('.active').removeClass('active').addClass('inactive');
           if (existingItem.length === 0) {
             item.appendTo(container);
@@ -43,7 +44,7 @@
           } else {
             existingItem.removeClass('inactive').addClass('active');
           }
-          return _this.el.trigger('itemloaded.featuredcarousel');
+          return _this.element.trigger('itemloaded.featuredcarousel');
         }
       });
     };
