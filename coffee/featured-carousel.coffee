@@ -8,7 +8,7 @@ class FeaturedCarousel
 
   listClickHandler: (event) =>
     event.preventDefault()
-    @selectedListItem = $(event.target)
+    @selectedListItem = $(event.currentTarget)
     @element.trigger('click.itemselected.featuredcarousel')
     @loadContent(@selectedListItem.attr('href'))
 

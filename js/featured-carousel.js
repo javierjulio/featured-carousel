@@ -16,7 +16,7 @@
 
     FeaturedCarousel.prototype.listClickHandler = function(event) {
       event.preventDefault();
-      this.selectedListItem = $(event.target);
+      this.selectedListItem = $(event.currentTarget);
       this.element.trigger('click.itemselected.featuredcarousel');
       return this.loadContent(this.selectedListItem.attr('href'));
     };
